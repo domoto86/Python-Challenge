@@ -11,8 +11,10 @@ great_dec = ["", 999999999]
 with open('Resources/budget_data.csv') as csvfile:
     file = csv.reader(csvfile, delimiter=',')
     
+    # Skips the first Row
     next(file)
     
+    # Find the total for Profit/loss and finds total of months
     for row in file:
 
         total_months = total_months + 1
@@ -20,7 +22,8 @@ with open('Resources/budget_data.csv') as csvfile:
         pl_total = pl_total + int(row[1])
 
         this_month = int(row[1])
-
+    
+    # Evaluates if the first row is greater than one. This helps to create the logic for previous month.
         if total_months > 1:
             profit_change = this_month - previous_month
             profit_changes.append(profit_change)
@@ -35,6 +38,7 @@ with open('Resources/budget_data.csv') as csvfile:
 
         previous_month = this_month
 
+# Finds the average of profit changes
 average_change = sum(profit_changes) / len(profit_changes)
 
 print("PyBasnk Analysis")
